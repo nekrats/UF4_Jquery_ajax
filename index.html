@@ -1,0 +1,125 @@
+
+<html lang="es">
+<head>
+
+    <title>Adivinalo</title>
+
+    <link rel="stylesheet" href="estilos.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body> 
+
+    <div id="titulo">
+
+        <div id="fecha" ><script>document.write(new Date().toDateString());</script></div>
+        
+        <div class="crono">
+            <h2>Tiempo de Sesión: <span id="segundos"></span></h2>
+            <script type="text/javascript">setInterval('misExtras.crono()', 1000)</script>
+        </div>
+
+        <div class="crono">
+            <h2>Tiempo restante de partida: <span id="tRestante"></span></h2>
+        </div>
+
+        
+        
+    </div>
+    <img id='bruja' src="image/adivina.png" onclick='misExtras.bruja()'>
+    <div id="opciones">
+        <!-- Contenedor de las 2 opciones de juego-->
+        <input type="button" id="opcion1" value="Adivinaré tu número" onclick='misExtras.elige("primera")'>
+        <input type="button" id="opcion2" value="Adivina mi número" onclick='misExtras.elige("segunda")'>
+    </div>
+
+
+    <div id="caja_dif1">
+        <form>
+            <h2>¿Que dificultad prefieres para el juego 1?</h2>
+            <!-- escogemos la dificultad del juego Adivinar numero de máquina -->
+            <input type="radio" name="dif" id="facil" value="10" onclick='maq_adivinare.dificultadVerde1()'>Fácil<br>
+            <input type="radio" name="dif" id="medio" value="50" onclick="maq_adivinare.dificultadMedia1()">Medio<br>
+            <input type="radio" name="dif" id="dificil" value="100" onclick="maq_adivinare.dificultadRoja1()">Difícil<br>
+            <p id="res_dificult1"></p>
+            <input id="boton" type="button" value="confirmar" onclick="maq_adivinare.confirma()">
+        </form>
+    </div>
+
+
+
+
+    <div id="caja_dif">
+        <form>
+            <h2>¿Que dificultad prefieres para el juego?</h2>
+            <!-- escogemos la dificultad del juego Adivinar numero de máquina -->
+            <input type="radio" name="dif" id="easy" onclick="maquina1.dificultadVerde2()">Fácil<br>
+            <input type="radio" name="dif" id="medium" onclick="maquina1.dificultadMedia2()">Medio<br>
+            <input type="radio" name="dif" id="dificul" onclick="maquina1.dificultadRoja2()">Difícil<br>
+            <p id="res_dificult"></p>
+            <input id="boton" type="button" value="confirmar" onclick="maquina1.confirma()">
+        </form>
+    </div>
+
+
+    <script>
+        function pista(){
+         var xhttp;
+         if(window.XMLHttpRequest){
+             xhttp = new XMLHttpRequest();
+         }
+         xhttp.onreadystatechange = function(){
+         if(this.readyState <= 4 && this.status <= 200) {
+             document.getElementById('ayuda').innerHTML = this.responseText;
+         }
+       };
+       xhttp.open('GET','ayuda.html', true);
+       xhttp.send();
+     }
+     </script>
+
+    <!-- Juego de Máquina adivina tu número -->
+    <div id="juego1" style="text-align: center;">
+        <p>En este juego tienes que pensar un número y la máquina va a intentar adivinarlo.</p>
+        <button id="start" onclick="maq_adivinare.muestra()">Comienza la partida</button><br><br>
+        <div id="botones">
+            <button id="peque" onclick="maq_adivinare.peque()">Más pequeño</button>
+            <button id="grande" onclick="maq_adivinare.mayor()">Más grande</button><br><br>
+        </div>   
+
+        <div style="text-align: center;">
+            <div id="contenedor">
+                <div id="respuesta"></div>
+                <img id="foto" src="image/BolaCristal2.png">
+            </div>
+        </div>
+        <button id="OK" onclick="maq_adivinare.victoria()">¡Has acertado!</button>
+        <button id="Reinicio" onclick="maq_adivinare.reinicia()">Reiniciar partida</button>
+        <button id="Pista" onclick="misExtras.pista('ayuda','ayuda.html')">¿Andas perdido?</button>
+        <div id="ayuda"></div>
+        
+        </div>
+    </div>
+
+   
+    <div id="juego2">
+        <div id="caja_j2">
+            <h2 style="text-align: center;">Adivina Inverso</h2>
+            <div style="text-align: center;">
+                <p>En este juego tienes que intentar adivinar que número esta pensando el ordenador.</p>
+                <div id="botones_2">
+                    <input id="numAD_2" type="text">
+                    <button id="comprueba" onclick="maquina1.random2()">Comprueba</button>
+                    <button id="Pista" onclick="misExtras.pista('ayuda2','ayudajuego2.html')">¿Andas perdido?</button>
+                    <div id="ayuda2"></div>
+                </div>
+                <p id="res_2"></p>
+                <div id="lista_numeros"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="functions.js"></script>
+    
+</body>
+</html>
