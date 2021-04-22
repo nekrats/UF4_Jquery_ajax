@@ -111,7 +111,7 @@ class Extras {
         xhttp.onreadystatechange = function(){
         if(this.readyState <= 4 && this.status <= 200) {
             // $(id).text(this.responseText);
-            document.getElementById(id).innerHTML = this.responseText;
+            $(id).text(this.responseText);
         }
       };
       xhttp.open('GET',url, true);
@@ -188,26 +188,26 @@ class Maquina_1 extends Juego {
 
             this.rando = Math.floor((Math.random() * this.max) + 1); /*Asignamos el que será el numero que tenemos que adivinar a partir del maximo escogio */
         } else if (this.dificultad == "medium") {
-            document.getElementById("caja_dif").style.height = "1%";
-            document.getElementById("caja_dif").style.visibility = "collapse";
-            document.getElementById("juego2").style.visibility = "visible";
+            $("#caja_dif").css('height','1%');
+            $("#caja_dif").css('visibility','collapse');
+            $("#juego2").css('visibility','visible');
             this.max = 50;
-            document.getElementById("caja_j2").style.backgroundColor = "chocolate";
-            document.body.style.backgroundImage = 'url("image/medium.jpg")';
-            document.getElementById("bruja").src = 'image/pensar.png';
+            $("#caja_j2").css('background-color',"chocolate");
+            $('body').css('background-image','url("image/medium.jpg")');
+            $("#bruja").attr('src','image/pensar.png');
             misExtras.restaTiempo = 20;
             this.tiempo = 20000;
             this.quitaralert = setTimeout(this.time_out, this.tiempo, "comprueba", "numAD_2");
             misExtras.intervalo = setInterval('misExtras.queda()',2000);
             this.rando = Math.floor((Math.random() * this.max) + 1); /*Asignamos el que será el numero que tenemos que adivinar a partir del maximo escogio */
         } else if (this.dificultad == "dificul") {
-            document.getElementById("caja_dif").style.height = "1%";
-            document.getElementById("caja_dif").style.visibility = "collapse";
-            document.getElementById("juego2").style.visibility = "visible";
+            $("#caja_dif").css('height','1%');
+            $("#caja_dif").css('visibility','collapse');
+            $("#juego2").css('visibility','visible');
             this.max = 100;
-            document.getElementById("caja_j2").style.backgroundColor = "firebrick";
-            document.body.style.backgroundImage = 'url("image/hell.jpg")';
-            document.getElementById("bruja").src = 'image/scared.png';
+            $("#caja_j2").css('background-color',"firebrick");
+            $('body').css('background-image','url("image/hell.jpg")');
+            $("#bruja").attr('src','image/scared.png');
             misExtras.restaTiempo = 30;
             this.tiempo = 30000;
             this.quitaralert = setTimeout(this.time_out, this.tiempo, "comprueba", "numAD_2");
@@ -216,23 +216,23 @@ class Maquina_1 extends Juego {
         }
     }
     random2() {
-        this.numeroIntroducido = document.getElementById("numAD_2").value;
+        this.numeroIntroducido = $("#numAD_2").value;
 
         if (this.numeroIntroducido <= 0) {
-            document.getElementById("res_2").innerHTML = "No pongas números negativos";
+            $("#res_2").text("No pongas números negativos");
         } else if (this.numeroIntroducido > this.max) {
-            document.getElementById("res_2").innerHTML = "No te pases de los límites";
+            $("#res_2").text("No te pases de los límites");
         } else if (isNaN(this.numeroIntroducido)) {
-            document.getElementById("res_2").innerHTML = "No puedes introducir letras";
+            $("#res_2").text("No puedes introducir letras");
         } else if (this.numeroIntroducido == this.rando) {
             /*Si ganas metemos un estilo para hacer collapse a todo y que quede bonito esteticamente */
-            document.getElementById("botones_2").style.visibility = "collapse";
-            document.getElementById("botones_2").style.height = "2%";
-            document.getElementById("res_2").innerHTML = "Has ganado!";
+            $("#botones_2").style.visibility = "collapse";
+            $("#botones_2").style.height = "2%";
+            $("#res_2").text("Has ganado!");
             clearInterval(misExtras.intervalo);
             clearTimeout(this.quitaralert);
         } else if (this.rando_max == (this.rando + 1)) {
-            document.getElementById("res_2").innerHTML = " Tu numero se encuentra entre " + (this.rando_min + 1) + " y " + (this.rando_max) + "<br> ¿Cuál será?";
+            $("#res_2").text(" Tu numero se encuentra entre " + (this.rando_min + 1) + " y " + (this.rando_max) + "\n¿Cuál será?");
             maquina1.pintaIntentos();
 
         } else {
@@ -252,13 +252,13 @@ class Maquina_1 extends Juego {
                 if (this.rando_max && this.rando_min == this.rando) {
                     this.rando_max += 1;
                     this.rando_min -= 1;
-                    document.getElementById("res_2").innerHTML = " Tu numero se encuentra entre " + this.rando_min + " y " + this.rando_max;
+                    $("#res_2").text(" Tu numero se encuentra entre " + this.rando_min + " y " + this.rando_max);
                     maquina1.pintaIntentos("lista_numeros", this.turnos, this.numeroIntroducido);
                 } else if (this.numeroIntroducido < this.rando) {
-                    document.getElementById("res_2").innerHTML = " Tu numero se encuentra entre " + this.numeroIntroducido + " y " + this.rando_max;
+                    $("#res_2").text(" Tu numero se encuentra entre " + this.numeroIntroducido + " y " + this.rando_max);
                     maquina1.pintaIntentos("lista_numeros", this.turnos, this.numeroIntroducido);
                 } else if (this.numeroIntroducido > this.rando) {
-                    document.getElementById("res_2").innerHTML = " Tu numero se encuentra entre " + this.rando_min + " y " + this.numeroIntroducido;
+                    $("#res_2").text(" Tu numero se encuentra entre " + this.rando_min + " y " + this.numeroIntroducido);
                     maquina1.pintaIntentos("lista_numeros", this.turnos, this.numeroIntroducido);
                 }
             } else if (this.turnos >= 2 && this.turnos < 4) {
@@ -272,19 +272,19 @@ class Maquina_1 extends Juego {
                     this.rando_min = 0;
                 }
                 if (this.numeroIntroducido < this.rando) {
-                    document.getElementById("res_2").innerHTML = " Tu numero se encuentra entre " + this.numeroIntroducido + " y " + this.rando_max;
+                    $("#res_2").text(" Tu numero se encuentra entre " + this.numeroIntroducido + " y " + this.rando_max);
                     maquina1.pintaIntentos("lista_numeros", this.turnos, this.numeroIntroducido);
                 } else if (this.numeroIntroducido > this.rando) {
-                    document.getElementById("res_2").innerHTML = " Tu numero se encuentra entre " + this.rando_min + " y " + this.numeroIntroducido;
+                    $("#res_2").text(" Tu numero se encuentra entre " + this.rando_min + " y " + this.numeroIntroducido);
                     maquina1.pintaIntentos("lista_numeros", this.turnos, this.numeroIntroducido);
                 }
 
             } else if (this.turnos < 2) {
                 if (this.numeroIntroducido < this.rando) {
-                    document.getElementById("res_2").innerHTML = " El numero es mas grande que " + this.numeroIntroducido;
+                    $("#res_2").text(" El numero es mas grande que " + this.numeroIntroducido);
                     maquina1.pintaIntentos("lista_numeros", this.turnos, this.numeroIntroducido);
                 } else if (this.numeroIntroducido > this.rando) {
-                    document.getElementById("res_2").innerHTML = " El numero es mas pequeño que " + this.numeroIntroducido;
+                    $("#res_2").text(" El numero es mas pequeño que " + this.numeroIntroducido);
                     maquina1.pintaIntentos("lista_numeros", this.turnos, this.numeroIntroducido);
                 }
             }
@@ -310,31 +310,31 @@ class Maquina_adivinare_tu_numero extends Juego {
         this.tiempo;
     }
     dificultadVerde1() {
-        document.getElementById("res_dificult1").innerHTML = " Esto hará que el juego vaya desde 0 a 10 <br> ¿Estás seguro?";
-        document.getElementById("caja_dif1").style.backgroundColor = "green";
+        $("#res_dificult1").text(" Esto hará que el juego vaya desde 0 a 10 <br> ¿Estás seguro?");
+        $("#caja_dif1").css('background-color',"green");
         return this.dificultad = "facil";
     }
     dificultadMedia1() {
-        document.getElementById("res_dificult1").innerHTML = "Esto hará que el juego vaya desde 0 a 50 <br> ¿Estás seguro?";
-        document.getElementById("caja_dif1").style.backgroundColor = "chocolate";
+        $("#res_dificult1").text("Esto hará que el juego vaya desde 0 a 50 <br> ¿Estás seguro?");
+        $("#caja_dif1").css('background-color',"chocolate");
         return this.dificultad = "medio";
     }
     dificultadRoja1() {
-        document.getElementById("res_dificult1").innerHTML = "Esto hará que el juego vaya desde 0 a 100 <br> ¿Estás seguro?";
-        document.getElementById("caja_dif1").style.backgroundColor = "brown";
+        $("#res_dificult1").text("Esto hará que el juego vaya desde 0 a 100 <br> ¿Estás seguro?");
+        $("#caja_dif1").css('background-color',"brown");
         return this.dificultad = "dificil";
     }
     confirma() {
         if (this.dificultad == "facil") {
-            document.getElementById("caja_dif1").style.height = "1%";
-            document.getElementById("caja_dif1").style.visibility = "collapse";
-            document.getElementById("juego1").style.visibility = "visible";
+            $("#caja_dif1").css('height',"1%");
+            $("#caja_dif1").css('visibility','collapse');
+            $("#juego1").css('visibility','visible');
             this.max = 11; /*Asignamos el valor maximo */
             this.reinicio = this.max; //numero que usaremos para reiniciar el juego
             this.rando = (this.max - this.min) / 2
             // document.getElementById("juego1").style.backgroundColor = "green";
             $('#juego1').css('background-color','green');
-            document.getElementById("bruja").src = 'image/happy.png';
+            $("#bruja").attr('src','image/happy.png');
             
             misExtras.restaTiempo = 10;
             this.tiempo = 10000;
@@ -343,15 +343,15 @@ class Maquina_adivinare_tu_numero extends Juego {
             misExtras.intervalo = setInterval('misExtras.queda()',2000);
 
         } else if (this.dificultad == "medio") {
-            document.getElementById("caja_dif1").style.height = "1%";
-            document.getElementById("caja_dif1").style.visibility = "collapse";
-            document.getElementById("juego1").style.visibility = "visible";
+            $("#caja_dif1").css('height',"1%");
+            $("#caja_dif1").css('visibility','collapse');
+            $("#juego1").css('visibility','visible');
             this.max = 51; /*Asignamos el valor maximo */
             this.reinicio = this.max;
             this.rando = (this.max - this.min) / 2
-            document.getElementById("juego1").style.backgroundColor = "chocolate";
-            document.body.style.backgroundImage = 'url("image/medium.jpg")';
-            document.getElementById("bruja").src = 'image/pensar.png';
+            $("#juego1").css('background-color',"chocolate");
+            $('body').css('background-image','url("image/medium.jpg")');
+            $("#bruja").css('src','image/pensar.png');
             
             misExtras.restaTiempo = 20;
             this.tiempo = 20000;
@@ -359,15 +359,15 @@ class Maquina_adivinare_tu_numero extends Juego {
             misExtras.intervalo = setInterval('misExtras.queda()',2000);
 
         } else if (this.dificultad == "dificil") {
-            document.getElementById("caja_dif1").style.height = "1%";
-            document.getElementById("caja_dif1").style.visibility = "collapse";
-            document.getElementById("juego1").style.visibility = "visible";
+            $("#caja_dif1").css('height',"1%");
+            $("#caja_dif1").css('visibility','collapse');
+            $("#juego1").css('visibility','visible');
             this.max = 101; /*Asignamos el valor maximo */
             this.reinicio = this.max;
             this.rando = (this.max - this.min) / 2
-            document.getElementById("juego1").style.backgroundColor = "firebrick";
-            document.body.style.backgroundImage = 'url("image/hell.jpg")';
-            document.getElementById("bruja").src = 'image/scared.png';
+            $("#juego1").css('background-color',"firebrick");
+            $('body').css('background-image','url("image/hell.jpg")');
+            $("#bruja").attr('src','image/scared.png');   /** hay que arreglar */
             
             misExtras.restaTiempo = 30;
             this.tiempo = 30000;
@@ -377,22 +377,22 @@ class Maquina_adivinare_tu_numero extends Juego {
     }
 
     muestra() {
-        document.getElementById("peque").style.height = "9%";
-        document.getElementById("peque").style.visibility = " visible";
-        document.getElementById("grande").style.height = "9%";
-        document.getElementById("grande").style.visibility = "visible";
-        document.getElementById("start").style.visibility = "collapse";
-        document.getElementById("start").style.height = "1%";
-        document.getElementById("OK").style.height = "8%";
-        document.getElementById("OK").style.visibility = "visible";
-        document.getElementById("Reinicio").style.height = "8%";
-        document.getElementById("Reinicio").style.visibility = "visible";
+        $("#peque").css('height',"9%");
+        $("#peque").css('visibility'," visible");
+        $("#grande").css('height',"9%");
+        $("#grande").css('visibility',"visible");
+        $("#start").css('visibility',"collapse");
+        $("#start").css('height', "1%");
+        $("#OK").css('height',"8%");
+        $("#OK").css('visibility',"visible");
+        $("#Reinicio").css('height',"8%");
+        $("#Reinicio").css('visibility',"visible");
         this.num_muestra = parseInt(this.rando);
 
         if (this.max == this.min && this.min == this.max) {
-            document.getElementById("respuesta").innerHTML = "<strong>¡No me hagas trampas que no quedan números!</strong>";
+            $("#respuesta").text("<strong>¡No me hagas trampas que no quedan números!</strong>");
         } else {
-            document.getElementById("respuesta").innerHTML = "¿Es " + this.num_muestra + " ?";
+            $("#respuesta").text("¿Es " + this.num_muestra + " ?");
             this.turnos++;
         }
     }
@@ -415,7 +415,7 @@ class Maquina_adivinare_tu_numero extends Juego {
     }
 
     victoria() {
-        document.getElementById("respuesta").innerHTML = "He acertado en " + this.turnos + " turnos";
+        $("#respuesta").text("He acertado en " + this.turnos + " turnos");
         clearInterval(misExtras.intervalo);
         clearTimeout(this.quitaralert);
     }
@@ -424,7 +424,7 @@ class Maquina_adivinare_tu_numero extends Juego {
         this.max = this.reinicio;
         this.rando = parseInt((this.max - this.min) / 2);
         this.turnos = 0;
-        document.getElementById("respuesta").innerHTML = "¿Es " + this.rando + " ?";
+        $("#respuesta").text("¿Es " + this.rando + " ?");
         this.turnos++;
     }
 }
