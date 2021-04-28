@@ -124,7 +124,7 @@ class Extras {
                 $(caja).append("<img id="+idaki+" src='image/akinator.png'>")
                 $(id2).css('display','none');
                 setTimeout(misExtras.byeAki(idaki),1000);
-                
+               //añadimos una animacion de ir y volver 
             }
         });
         
@@ -138,6 +138,17 @@ class Extras {
                 $("#"+idaki).animate({left: "61%"},5000);
             });
         
+    }
+    cambiaBola(){ //nos servirá para alternar la vista de la bola
+
+        if($("#foto").hasClass('foto2')){
+            $("#foto").removeClass("foto2");
+            $("#foto").attr('src','image/BolaCristal2.png');
+        }else{
+            $('#foto').attr('class','foto2');
+            $("#foto").attr('src','image/bolacristal.png');
+            
+        }
     }
 }
 
